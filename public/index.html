@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Pacientes</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Género</th>
+                <th>Dirección</th>
+            </tr>
+        </thead>
+        <tbody id="pacientes-table-body">
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/api/pacientes')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('pacientes-table-body');
+                    data.forEach(paciente => {
+                        const row = document.createElement('tr');
+                        paciente.forEach(cellData => {
+                            const cell = document.createElement('td');
+                            cell.textContent = cellData;
+                            row.appendChild(cell);
+                        });
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching pacientes:', error);
+                });
+        });
+    </script>
+</body>
+</html>
