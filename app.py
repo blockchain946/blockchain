@@ -3,7 +3,11 @@ from flask import Flask, jsonify, send_from_directory
 import oracledb
 
 # Configuración de las variables de entorno
+os.environ['TNS_ADMIN'] = '/home/ubuntu/blockchain/Wallet_NFTS'
 os.environ['NODE_EXTRA_CA_CERTS'] = '/home/ubuntu/blockchain/Wallet_NFTS/ewallet.pem'
+
+# Inicializar el cliente Oracle en modo Thick
+oracledb.init_oracle_client(config_dir='/home/ubuntu/blockchain/Wallet_NFTS')
 
 app = Flask(__name__, static_folder='public')
 
@@ -11,8 +15,7 @@ app = Flask(__name__, static_folder='public')
 db_config = {
     'user': 'ADMIN',  # Usuario de la base de datos
     'password': 'K@rdyan260202cr!',  # Contraseña del usuario de la base de datos
-    'dsn': 'nfts_high',  # Usar el alias del tnsnames.ora
-    'config_dir': '/home/ubuntu/blockchain/Wallet_NFTS'  # Directorio de configuración
+    'dsn': 'nfts_high'  # Usar el alias del tnsnames.ora
 }
 
 @app.route('/')
