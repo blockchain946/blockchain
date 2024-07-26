@@ -21,6 +21,8 @@ def index():
 
 @app.route('/api/pacientes', methods=['GET'])
 def get_pacientes():
+    connection = None
+    cursor = None
     try:
         connection = oracledb.connect(**db_config)
         cursor = connection.cursor()
@@ -36,5 +38,5 @@ def get_pacientes():
         if connection:
             connection.close()
 
-if __name__ == '_main_':
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=40000)
