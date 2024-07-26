@@ -6,6 +6,9 @@ import oracledb
 os.environ['TNS_ADMIN'] = '/home/ubuntu/blockchain/Wallet_NFTS'
 os.environ['NODE_EXTRA_CA_CERTS'] = '/home/ubuntu/blockchain/Wallet_NFTS/ewallet.pem'
 
+# Inicializar el cliente Oracle en modo Thick
+oracledb.init_oracle_client(config_dir='/home/ubuntu/blockchain/Wallet_NFTS')
+
 app = Flask(__name__, static_folder='public')
 
 # Configuración de la base de datos
